@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="index.css">
+    <script src="helpers.js"></script>
+    <title>Note Taker App</title>
+</head>
+<body>
+    <div class="front-page">
+        <h2 class="header">Note Taker App</h2>
+            <textarea id="note" name="note-text" class="note-area"></textarea>
+            <br>
+            <button id="submit" onclick="saveNote()" class="submit">Save Note</button>
+        <div class="notes-link">
+            <a href="index2.html" >View Notes</a>
+        </div> 
+    </div>
+</body>
+
+<script>
+var textElement = document.getElementById("note")
+
+function saveNote() {
+    if (textElement.value=="") {
+        alert("You are unable to save blank notes. Please input a note and try again.")
+    } else {
+        const id = retrieveNoteId()
+        let noteObject = getExistingNotes()
+
+        // If no note objects exist, create a new note object
+        if (!noteObject) {
+            noteObject = {}
+        }
+
+        // Set object ID and value, then save to local storage, alert user, & clear form
+        noteObject[id] = textElement.value
+        localStorage.setItem('notes', JSON.stringify(noteObject))
+        alert("Your note has been saved!")
+        console.log(localStorage)
+        clearForm()
+    } 
+}
+</script>

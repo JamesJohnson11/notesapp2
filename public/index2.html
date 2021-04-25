@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="index.css">
+    <script src="helpers.js"></script>
+    <title>Note Taker App</title>
+</head>
+
+<div class="second-page">
+    <ol id="notes-list">
+
+    </ol>
+</div>
+<button id="delete" onclick="deleteAllNotes()" class="delete">Delete All Notes</button>
+
+<a href="index.html"><h3>Back</h3></a>
+
+
+<script>
+    (function displayNotes() {
+        let notes = getExistingNotes()
+        if (!notes) {
+            noNotesMessage()
+        } else {
+            let notesArray = Object.values(notes)
+            let orderedlist = document.getElementById("notes-list")
+            for (let i = 1; i <= notesArray.length; i++) {
+            let listItem = document.createElement("li")
+            listItem.innerHTML = notes[i]
+            orderedlist.appendChild(listItem)
+            }
+        }
+    })()
+</script>
